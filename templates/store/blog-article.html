@@ -1,0 +1,43 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Blog Article -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded shadow p-6">
+            <h1 class="font-bold text-5xl mb-2">Title of the Blog Article</h1>
+            <p class="text-gray-600 text-sm">Published on: 2024-01-16</p>
+            <img src="{% static 'img/placeholder.png' %}" alt="Article Main" class="rounded mt-10 mb-10">
+            <div class="mt-4 text-gray-700">
+                <p>Here is the first paragraph of the article...</p>
+                <p>Here is the second paragraph of the article...</p>
+                <!-- More content -->
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="bg-white rounded shadow p-6 mt-6">
+            <h2 class="font-bold text-2xl mb-4">Comments</h2>
+            <!-- Comment Entry -->
+            <div class="mt-4">
+                <p class="text-gray-700 font-semibold">John Doe</p>
+            <p class="text-gray-600 text-sm">Posted on: 2024-01-17</p>
+            <p class="text-gray-600">This is a comment on the article.</p>
+            </div>
+            <!-- Add more comments here -->
+        </div>
+
+    <!-- Add Comment Form -->
+    <div class="bg-white rounded shadow p-6 mt-6">
+        <h2 class="font-bold text-2xl mb-4">Leave a Comment</h2>
+        <form action="#" method="post">
+            <div class="mb-4">
+                <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">Your Comment</label>
+                <textarea id="comment" name="comment" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            </div>
+            <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post Comment</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

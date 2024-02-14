@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 1000 1000"
+   version="1.1"
+   sodipodi:docname="Tiktok.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.19675"
+     inkscape:cx="1029.2249"
+     inkscape:cy="152.47776"
+     inkscape:window-width="1920"
+     inkscape:window-height="959"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <g
+     id="g20"
+     transform="matrix(1.6661759,0,0,-1.6661759,805.13763,201.07304)">
+    <path
+       d="m 0,0 c -32.262,21.035 -55.547,54.691 -62.811,93.925 -1.569,8.477 -2.431,17.201 -2.431,26.127 h -102.967 l -0.165,-412.656 c -1.731,-46.21 -39.764,-83.299 -86.389,-83.299 -14.491,0 -28.136,3.623 -40.15,9.945 -27.55,14.498 -46.404,43.376 -46.404,76.608 0,47.728 38.83,86.558 86.554,86.558 8.909,0 17.455,-1.47 25.539,-4.002 v 80.728 24.39 c -8.366,1.139 -16.866,1.851 -25.539,1.851 -104.504,0 -189.521,-85.021 -189.521,-189.525 0,-64.118 32.035,-120.86 80.908,-155.171 30.784,-21.612 68.229,-34.349 108.613,-34.349 104.504,0 189.521,85.016 189.521,189.52 v 209.252 c 40.385,-28.986 89.863,-46.067 143.253,-46.067 v 80.027 22.94 C 49.251,-23.198 22.465,-14.648 0,0"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path22" />
+  </g>
+</svg>

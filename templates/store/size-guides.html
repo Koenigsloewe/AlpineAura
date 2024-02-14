@@ -1,0 +1,82 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+<!-- Blog Article -->
+<div class="container mx-auto px-6 py-8">
+    <div class="bg-white rounded shadow p-6">
+        <h1 class="font-bold text-5xl mb-2">AlpineAura Size Guide</h1>
+        <p class="text-gray-600 text-sm">Published on: 2024-01-16</p>
+        <img src="{% static 'img/sizes_guides.png' %}" alt="AlpineAura Size Guide" class="rounded mt-10 mb-10">
+        <div class="mt-4 text-gray-700">
+            <p>Welcome to the AlpineAura Size Guide! Here, we'll help you find the perfect fit for your outdoor adventures. Whether you're gearing up for a hike, a camping trip, or any outdoor activity, our comprehensive size guide ensures you get the gear that fits you best.</p>
+
+            <h2 class="font-bold text-2xl mt-4">1. Hiking Apparel (Men & Women):</h2>
+            <ul class="list-disc pl-5">
+                <li><strong>Shirts & Jackets:</strong> Measure your chest and waist. For a comfortable fit, especially for active wear, ensure there's a little extra room.</li>
+                <li><strong>Pants & Shorts:</strong> Waist and hip measurements are key. Remember to consider the rise (high, mid, or low) for the best fit.</li>
+                <li><strong>Size Chart:</strong> Provide a detailed size chart with measurements in inches/centimeters.</li>
+            </ul>
+
+            <h2 class="font-bold text-2xl mt-4">2. Footwear (Men & Women):</h2>
+            <ul class="list-disc pl-5">
+                <li><strong>Hiking Boots & Shoes:</strong> Foot length is crucial. Measure both feet and use the larger size. Consider the type of socks you'll wear.</li>
+                <li><strong>Width Options:</strong> Some models offer different width options. A proper width ensures comfort, especially on long hikes.</li>
+            </ul>
+
+            <h2 class="font-bold text-2xl mt-4">3. Backpacks:</h2>
+            <ul class="list-disc pl-5">
+                <li><strong>Torso Length:</strong> Backpack fit depends on torso length, not height. Measure from the base of your neck to the top of your hips.</li>
+                <li><strong>Capacity Guide:</strong> Explain how to choose the capacity based on trip length (e.g., 20-30 liters for day hikes, 50+ liters for multi-day treks).</li>
+            </ul>
+
+            <h2 class="font-bold text-2xl mt-4">4. Accessories (Hats, Gloves, etc.):</h2>
+            <ul class="list-disc pl-5">
+                <li><strong>Hats:</strong> Head circumference determines hat size. Measure around the widest part of your head.</li>
+                <li><strong>Gloves:</strong> Hand size and length are important. Provide a chart for sizes from XS to XL.</li>
+            </ul>
+
+            <p class="mt-4">Tips for Measuring:</p>
+            <ul class="list-disc pl-5">
+                <li>Use a flexible tape measure.</li>
+                <li>Measure over light clothing for accuracy.</li>
+                <li>When in doubt, size up for layering and comfort.</li>
+            </ul>
+
+            <p class="mt-4">How to Use the Size Guide:</p>
+            <ul class="list-disc pl-5">
+                <li>Measure Yourself: Use a flexible tape measure and follow our tips above.</li>
+                <li>Compare with Our Charts: Match your measurements with our size charts.</li>
+                <li>Consider Your Needs: Think about your intended activity and personal preferences for fit (snug vs. loose).</li>
+            </ul>
+
+            <p class="mt-4">Need Help?</p>
+            <p>Our customer service team is here to assist you with sizing and any questions you might have. Contact us at support@alpineaura.com.</p>
+
+        </div>
+    </div>
+</div>
+
+<!-- Comments Section -->
+<div class="container bg-white rounded shadow p-6 mt-6">
+    <h2 class="font-bold text-2xl mb-4">Comments</h2>
+    <!-- Comment Entry -->
+    <div class="mt-4">
+        <p class="text-gray-700 font-semibold">John Doe</p>
+        <p class="text-gray-600 text-sm">Posted on: 2024-01-17</p>
+        <p class="text-gray-600">This is a comment on the article.</p>
+    </div>
+    <!-- Add more comments here -->
+</div>
+
+<!-- Add Comment Form -->
+<div class="container bg-white rounded shadow p-6 mt-6">
+    <h2 class="font-bold text-2xl mb-4">Leave a Comment</h2>
+    <form action="#" method="post">
+        <div class="mb-4">
+            <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">Your Comment</label>
+            <textarea id="comment" name="comment" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+        </div>
+        <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post Comment</button>
+    </form>
+</div>
+
+{% endblock content %}

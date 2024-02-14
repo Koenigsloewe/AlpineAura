@@ -1,0 +1,81 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container py-4 flex items-center gap-3">
+        <a href="{% url 'home' %}" class="text-primary text-base">
+            <img class="" src="{% static 'icons/home.svg' %}">
+        </a>
+        <span class="text-sm text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </span>
+        <p class="text-gray-600 font-medium">Contact</p>
+    </div>
+
+    <div class="container mx-auto p-5">
+        <h1 class="text-2xl font-bold text-center mb-4">Contact Us</h1>
+        <p class="text-center mb-8">At AlpineAura, we're here to help you embark on your next outdoor adventure with confidence. Whether you have a question about our products, need assistance with your order, or just want to share your mountain tales, we're all ears.</p>
+
+        <div class="bg-white shadow-md rounded p-6">
+            <h2 class="text-xl font-semibold mb-4">Get in Touch</h2>
+            <p class="mb-4">Feel free to reach out to us through the following channels:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-semibold">Email:</h3>
+                    <p>support@alpineaura.com</p>
+                    <p>(For customer support, order queries, and general inquiries)</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold">Phone:</h3>
+                    <p>+1 (800) 123-4567</p>
+                    <p>(Monday to Friday: 9 AM - 6 PM EST)</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-semibold">Headquarters:</h3>
+                <p>AlpineAura Inc.,</p>
+                <p>123 Mountain Trail Lane,</p>
+                <p>Aspen, CO 81611, USA</p>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-semibold">Follow Us:</h3>
+                <p>Stay connected and follow our journey on social media for the latest updates, offers, and outdoor inspiration.</p>
+                <div class="flex space-x-4 mt-2">
+                    <a href="#" class="text-blue-600">[Facebook Icon]</a>
+                    <a href="#" class="text-pink-600">[Instagram Icon]</a>
+                    <a href="#" class="text-blue-400">[Twitter Icon]</a>
+                    <a href="#" class="text-red-600">[YouTube Icon]</a>
+                </div>
+            </div>
+
+            <form action="#" method="post">
+                <h3 class="font-semibold mb-4">Send Us a Message</h3>
+                <div class="mb-4">
+                    <label for="name" class="block mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="subject" class="block mb-2">Subject</label>
+                    <input type="text" id="subject" name="subject" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block mb-2">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
+                </div>
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark">Submit</button>
+            </form>
+
+            <div class="my-8">
+            <h3 class="font-semibold mb-4">Map and Directions</h3>
+            <iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=8.160095214843752%2C51.857411127607996%2C8.709411621093752%2C52.17224727394878&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=11/52.0151/8.4348">View Larger Map</a></small>
+        </div>
+        </div>
+    </div>
+{% endblock content %}

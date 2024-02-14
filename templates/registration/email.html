@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hello {{ user.user_name }},
+
+Welcome to AlpineAura! Click below to activate your account and dive in:
+
+http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
+
+Questions? Contact us at support@alpineaura.com.
+
+Cheers,
+The AlpineAura Team
+    
+    
+{% endautoescape %}

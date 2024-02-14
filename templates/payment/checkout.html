@@ -1,0 +1,136 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+        <a href="{% url 'store:home' %}" class="text-primary text-base">
+            <img class="" src="{% static 'icons/home.svg' %}">
+        </a>
+        <span class="text-sm text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </span>
+        <p class="text-gray-600 font-medium">Checkout</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- wrapper -->
+    <form id="payment-form" action="post" method="post" class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
+
+        <div class="col-span-8 border border-gray-200 p-4 rounded-md shadow-sm">
+            <h3 class="text-xl font-semibold capitalize mb-6 text-gray-800">Checkout Details</h3>
+            <div class="space-y-6 pb-12">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label for="first-name" class="text-gray-700 font-medium">First Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="first-name" id="first-name" placeholder="John" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                    </div>
+                    <div>
+                        <label for="last-name" class="text-gray-700 font-medium">Last Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="last-name" id="last-name" placeholder="Doe" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                    </div>
+                </div>
+                <div>
+                    <label for="region" class="text-gray-700 font-medium">Country/Region</label>
+                    <input type="text" name="region" id="region" placeholder="United States" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="address" class="text-gray-700 font-medium">Street Address</label>
+                    <input type="text" name="address" id="address" placeholder="1234 Main St" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="city" class="text-gray-700 font-medium">City</label>
+                    <input type="text" name="city" id="city" placeholder="Anytown" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="phone" class="text-gray-700 font-medium">Phone Number</label>
+                    <input type="text" name="phone" id="phone" placeholder="+1234567890" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="email" class="text-gray-700 font-medium">Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="you@example.com" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="card-element" class="text-gray-700 font-medium">Credit or debit card</label>
+                    <div id="card-element" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm"></div>
+                    <div id="card-errors" role="alert" class="mt-2 text-sm text-red-600"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-span-4 border border-gray-200 p-4 rounded">
+            <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <div>
+                        <h5 class="text-gray-800 font-medium">Italian shape sofa</h5>
+                        <p class="text-sm text-gray-600">Size: M</p>
+                    </div>
+                    <p class="text-gray-600">
+                        x3
+                    </p>
+                    <p class="text-gray-800 font-medium">$320</p>
+                </div>
+                <div class="flex justify-between">
+                    <div>
+                        <h5 class="text-gray-800 font-medium">Italian shape sofa</h5>
+                        <p class="text-sm text-gray-600">Size: M</p>
+                    </div>
+                    <p class="text-gray-600">
+                        x3
+                    </p>
+                    <p class="text-gray-800 font-medium">$320</p>
+                </div>
+                <div class="flex justify-between">
+                    <div>
+                        <h5 class="text-gray-800 font-medium">Italian shape sofa</h5>
+                        <p class="text-sm text-gray-600">Size: M</p>
+                    </div>
+                    <p class="text-gray-600">
+                        x3
+                    </p>
+                    <p class="text-gray-800 font-medium">$320</p>
+                </div>
+                <div class="flex justify-between">
+                    <div>
+                        <h5 class="text-gray-800 font-medium">Italian shape sofa</h5>
+                        <p class="text-sm text-gray-600">Size: M</p>
+                    </div>
+                    <p class="text-gray-600">
+                        x3
+                    </p>
+                    <p class="text-gray-800 font-medium">$320</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                <p>subtotal</p>
+                <p>$1280</p>
+            </div>
+
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                <p>shipping</p>
+                <p>Free</p>
+            </div>
+
+            <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
+                <p class="font-semibold">Total</p>
+                <p>$1280</p>
+            </div>
+
+            <button id="submit" data-secret="{{ client_secret }}"
+                class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
+                order
+            </button>
+        </div>
+
+    </form>
+    <!-- ./wrapper -->
+    <script>
+    var CSRF_TOKEN = '{% csrf_token %}';
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'js/checkout.js' %}"></script>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto px-4">
+
+    <div class="container py-4 flex items-center gap-3">
+        <a href="../index.html" class="text-primary text-base">
+            <img class="bg-gray-600" src="{% static 'icons/home.svg' %}">
+        </a>
+        <span class="text-sm text-gray-400">
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        <p class="text-gray-600 font-medium">About us</p>
+    </div>
+
+    <!-- Introduction -->
+    <section class="my-8 text-center">
+        <h1 class="text-2xl font-bold">Welcome to AlpineAura</h1>
+        <p class="mt-2">Where the spirit of adventure meets the essence of the outdoors.</p>
+    </section>
+
+    <!-- Section 1 (Image First on Mobile) -->
+    <section class="flex flex-wrap md:flex-row flex-col items-center my-8">
+        <img src="{% static 'img/story.png' %}" alt="Our Story Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Our Story</h2>
+            <p class="mt-2">Born from a passion for the untamed wilderness and a love for hiking, AlpineAura was founded to cater to enthusiasts who seek both challenge and tranquility in the mountains. Our journey began in [Year], driven by the vision of [Founder's Name], an avid hiker and outdoor enthusiast. Frustrated by the lack of specialized, high-quality hiking gear that could withstand the diverse conditions of mountain terrains, [He/She/They] set out to create a one-stop shop for all hiking needs.</p>
+        </div>
+    </section>
+
+    <!-- Section 2 (Image First on Mobile) -->
+    <section class="flex flex-wrap md:flex-row-reverse flex-col items-center my-8">
+        <img src="{% static 'img/mission.png' %}" alt="Our Mission Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Our Mission</h2>
+            <p class="mt-2">At AlpineAura, our mission is simple: to inspire and equip you for your next outdoor adventure. We believe that the mountains are for everyone - from the seasoned trekker to the enthusiastic beginner. Our goal is to make your experience as fulfilling and safe as possible, with gear and apparel that you can trust.</p>
+        </div>
+    </section>
+
+    <!-- Remaining sections... -->
+
+    <!-- Ensure that for each section, the image tag has the class 'order-first' to display it first on mobile. -->
+
+</div>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<div class="container mx-auto px-4">
+
+    <div class="container py-4 flex items-center gap-3">
+        <a href="{% url 'home' %}" class="text-primary text-base">
+            <img class="" src="{% static 'icons/home.svg' %}">
+        </a>
+        <span class="text-sm text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </span>
+        <p class="text-gray-600 font-medium">About us</p>
+    </div>
+
+    <!-- Introduction -->
+    <section class="my-8 text-center">
+        <h1 class="text-2xl font-bold">Welcome to AlpineAura</h1>
+        <p class="mt-2">Where the spirit of adventure meets the essence of the outdoors.</p>
+    </section>
+
+    <!-- Section 1 -->
+    <section class="flex flex-wrap md:flex-row flex-col items-center my-8">
+        <img src="{% static 'img/story.png' %}" alt="Our Story Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Our Story</h2>
+            <p class="mt-2">Born from a passion for the untamed wilderness and a love for hiking, AlpineAura was founded to cater to enthusiasts who seek both challenge and tranquility in the mountains. Our journey began in [Year], driven by the vision of [Founder's Name], an avid hiker and outdoor enthusiast. Frustrated by the lack of specialized, high-quality hiking gear that could withstand the diverse conditions of mountain terrains, [He/She/They] set out to create a one-stop shop for all hiking needs.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="flex flex-wrap md:flex-row-reverse flex-col items-center my-8">
+        <img src="{% static 'img/mission.png' %}" alt="Our Mission Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Our Mission</h2>
+            <p class="mt-2">At AlpineAura, our mission is simple: to inspire and equip you for your next outdoor adventure. We believe that the mountains are for everyone - from the seasoned trekker to the enthusiastic beginner. Our goal is to make your experience as fulfilling and safe as possible, with gear and apparel that you can trust.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="flex flex-wrap md:flex-row flex-col items-center my-8">
+        <img src="{% static 'img/what_we_offer.png' %}" alt="What We Offer Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">What We Offer</h2>
+            <p class="mt-2">AlpineAura offers a meticulously curated selection of hiking gear, apparel, and accessories. From rugged hiking boots to lightweight backpacks, weather-resistant clothing to navigation tools, we’ve got everything covered. Our products are sourced from top manufacturers known for their quality and durability, ensuring that you are well-equipped for any journey.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="flex flex-wrap md:flex-row-reverse flex-col items-center my-8">
+        <img src="{% static 'img/sustainability.png' %}" alt="Sustainability Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Sustainability at Our Core</h2>
+            <p class="mt-2">We understand that our love for the outdoors comes with a responsibility towards preserving it. That’s why sustainability is at the heart of everything we do at AlpineAura. We prioritize eco-friendly products, engage in responsible sourcing, and advocate for the conservation of natural habitats.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="flex flex-wrap md:flex-row flex-col items-center my-8">
+        <img src="{% static 'img/community.png' %}" alt="Community Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Join Our Community</h2>
+            <p class="mt-2">AlpineAura is more than just a brand; it's a community of like-minded individuals who share a love for the mountains. We encourage our customers to share their stories, tips, and experiences. Join us on [Social Media Platforms] to connect with fellow hikers, participate in discussions, and stay updated on the latest in hiking and outdoor adventures.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section class="flex flex-wrap md:flex-row-reverse flex-col items-center my-8">
+        <img src="{% static 'img/customer_service.png' %}" alt="Customer Service Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Our Promise to You</h2>
+            <p class="mt-2">Your satisfaction is our top priority. We are committed to providing not just premium products, but also exceptional customer service. Whether you need advice on gear selection or have queries about your order, our knowledgeable team is here to assist you.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 7 -->
+    <section class="flex flex-wrap md:flex-row flex-col items-center my-8">
+        <img src="{% static 'img/conclusion.png' %}" alt="Conclusion Image" class="w-full md:w-1/2 order-first">
+        <div class="w-full md:w-1/2 p-4">
+            <h2 class="text-xl font-bold">Embark on Your Next Adventure with AlpineAura</h2>
+            <p class="mt-2">Whether you're gearing up for a challenging mountain trek or a leisurely nature walk, AlpineAura is here to ensure your adventure is memorable and majestic. Explore our range, find your perfect gear, and step into the great outdoors with confidence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Additional Content Here -->
+<section class="my-8 text-center p-4">
+    <h1 class="mt-2 mb-8 text-xl">Experience the Aura of the Alps with AlpineAura.</h1>
+    <a href="{% url 'shop' %}" class="bg-primary border border-primary text-white px-8 py-3 font-medium rounded-md hover:bg-transparent hover:text-primary mt-8">Shop our Collection</a>
+</section>
+
+</div>
+{% endblock content %}

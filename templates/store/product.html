@@ -1,0 +1,311 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+        <a href="#" class="text-primary text-base">
+            <img class="" src="{% static 'icons/home.svg' %}">
+        </a>
+        <span class="text-sm text-gray-400">
+            <img class="" src="{% static 'icons/chevron_right.svg' %}">
+        </span>
+        <p class="text-gray-600 font-medium">Product</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- product-detail -->
+<div class="container md:grid md:grid-cols-2 md:gap-6">
+    <div>
+        <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_1.png' %}" alt="SummitPro Hiking Backpack Front View" class="w-full">
+        <div class="grid grid-cols-5 gap-4 mt-4">
+            <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_1.png' %}" alt="SummitPro Hiking Backpack Front View"
+                class="w-full cursor-pointer border border-primary">
+            <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_2.png' %}" alt="Back Panel and Shoulder Straps" class="w-full cursor-pointer border">
+            <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_3.png' %}" alt="Interior View" class="w-full cursor-pointer border">
+            <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_4.png' %}" alt="Side View" class="w-full cursor-pointer border">
+            <img src="{% static 'img/product1/SummitPro_Hiking_Backpack_5.png' %}" alt="Backpack in Use" class="w-full cursor-pointer border">
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-2xl md:text-3xl font-medium uppercase mb-2">{{ product.title }} </h2>
+        <div class="flex items-center mb-4">
+            <div class="flex gap-1 text-sm text-yellow-400">
+                <span><img src="{% static 'icons/star.svg' %}"></span>
+                <span><img src="{% static 'icons/star.svg' %}"></span>
+                <span><img src="{% static 'icons/star.svg' %}"></span>
+                <span><img src="{% static 'icons/star.svg' %}"></span>
+                <span><img src="{% static 'icons/star_half.svg' %}"></span>
+            </div>
+            <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div>
+        </div>
+        <div class="space-y-2">
+            <p class="text-gray-800 font-semibold space-x-2">
+                <span>Availability: </span>
+                <span class="text-green-600">In Stock</span>
+            </p>
+            <p class="space-x-2">
+                <span class="text-gray-800 font-semibold">Brand: </span>
+                <span class="text-gray-600">AlpineAura</span>
+            </p>
+            <p class="space-x-2">
+                <span class="text-gray-800 font-semibold">Category: </span>
+                <span class="text-gray-600">Backpacks and Bags</span>
+            </p>
+            <p class="space-x-2">
+                <span class="text-gray-800 font-semibold">SKU: </span>
+                <span class="text-gray-600">BE45VGRT</span>
+            </p>
+        </div>
+        <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
+            <p class="text-xl text-primary font-semibold">$249.99</p>
+            <p class="text-base text-gray-400 line-through">$299.99</p>
+        </div>
+
+        <p class="mt-4 text-gray-600">The SummitPro Hiking Backpack is designed for the ultimate outdoor enthusiast. Its ergonomic design ensures maximum comfort on long treks, while the durable, water-resistant material keeps your gear safe and dry. The 50L capacity is perfect for all your hiking essentials, with multiple pockets and compartments for easy organization.</p>
+
+        <div class="pt-4">
+            <h3 class="text-sm text-gray-800 uppercase mb-1">Size</h3>
+            <!-- Sizes here -->
+            <!-- Assuming the backpack has one standard size -->
+            <p class="text-sm text-gray-800">Standard - One Size Fits All</p>
+        </div>
+
+        <div class="pt-4">
+    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
+    <div class="flex items-center gap-2">
+        <div class="color-selector">
+            <input type="radio" name="color" id="green" class="hidden" checked>
+            <label for="green"
+                class="border-2 rounded-sm h-6 w-6 cursor-pointer shadow-sm block
+                border-gray-200 checked:border-primary"
+                style="background-color: #3f704d;"></label>
+        </div>
+        <div class="color-selector">
+            <input type="radio" name="color" id="blue" class="hidden">
+            <label for="blue"
+                class="border-2 rounded-sm h-6 w-6 cursor-pointer shadow-sm block
+                border-gray-200 checked:border-primary"
+                style="background-color: #1e3a8a;"></label>
+        </div>
+        <div class="color-selector">
+            <input type="radio" name="color" id="orange" class="hidden">
+            <label for="orange"
+                class="border-2 rounded-sm h-6 w-6 cursor-pointer shadow-sm block
+                border-gray-200 checked:border-primary"
+                style="background-color: #ea580c;"></label>
+        </div>
+    </div>
+</div>
+
+
+        <div class="mt-4">
+            <h3 class="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
+            <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                <button id="decrease-qty" class="text-gray-500 focus:outline-none focus:text-gray-600"><img src="{% static 'icons/remove.svg' %}"></button>
+                <input type="number" id="product-qty" value="1" class="mx-2 border text-center w-24">
+                <button id="increase-qty" class="text-gray-500 focus:outline-none focus:text-gray-600"><img src="{% static 'icons/add.svg' %}"></button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 border-b border-gray-200 pb-5 pt-5">
+    <button type="button" id="add-button" data-url="{% url 'cart:cart_add' %}" data-csrf-token="{{ csrf_token }}" value="{{ product.id }}"
+       class="bg-primary border border-primary text-white px-4 py-2 font-medium rounded uppercase flex items-center gap-2 justify-center hover:bg-transparent hover:text-primary transition">
+        <img src="{% static 'icons/shopping_cart.svg' %}" alt="Cart"> Add to cart
+    </button>
+    <a href="#"
+       class="border border-gray-300 text-gray-600 px-4 py-2 font-medium rounded uppercase flex items-center gap-2 justify-center hover:text-primary transition">
+        <img src="{% static 'icons/favorite.svg' %}" alt="Wishlist"> Wishlist
+    </a>
+</div>
+
+    </div>
+</div>
+<!-- ./product-detail -->
+
+
+    <!-- description -->
+<div class="container pb-16">
+    <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium mt-4">Product Details</h3>
+    <div class="md:w-3/5 pt-6">
+        <div class="text-gray-600">
+            <p>Embark on your next outdoor adventure with the unparalleled comfort and durability of the SummitPro Hiking Backpack. Crafted for the modern explorer, this backpack combines ergonomic design with high-end functionality.</p>
+            <p>The SummitPro Backpack features a spacious 50L main compartment, perfect for all your hiking essentials, along with various specialized pockets including a hydration sleeve. Its water-resistant construction and integrated rain cover keep your gear safe and dry in any weather.</p>
+            <p>Designed with your comfort in mind, the backpack includes ventilated back panels and padded shoulder straps for extended wear. The lightweight design ensures ease of movement, making it the ideal choice for both day hikes and multi-day treks.</p>
+        </div>
+
+        <table class="table-auto border-collapse w-full text-left text-gray-600 text-sm mt-6">
+            <tr>
+                <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Colors</th>
+                <th class="py-2 px-4 border border-gray-300 ">Alpine Green, Midnight Blue, Sunset Orange</th>
+            </tr>
+            <tr>
+                <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Material</th>
+                <th class="py-2 px-4 border border-gray-300 ">High-Grade Water-Resistant Nylon</th>
+            </tr>
+            <tr>
+                <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Weight</th>
+                <th class="py-2 px-4 border border-gray-300 ">1.2 kg</th>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- ./description -->
+
+
+    <!-- related product -->
+    <div class="container pb-16">
+        <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Related products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white shadow rounded overflow-hidden group">
+            <div class="group relative rounded overflow-hidden">
+                <img src="{% static 'img/placeholder.png' %}" alt="product 1" class="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="view product">
+                        <img src="{% static 'icons/search.svg' %}" alt="search">
+                    </a>
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
+                        <img src="{% static 'icons/favorite.svg' %}" alt="favorite">
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-4 pb-3 px-4">
+                <a href="#">
+                    <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer Chair
+                    </h4>
+                </a>
+                <div class="flex items-baseline mb-1 space-x-2">
+                    <p class="text-xl text-primary font-semibold">$45.00</p>
+                    <p class="text-sm text-gray-400 line-through">$55.90</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex gap-1 text-sm text-yellow-400">
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star_half.svg' %}"></span>
+                    </div>
+                    <div class="text-xs text-gray-500 ml-3">(150)</div>
+                </div>
+            </div>
+            <a href="#" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                    to cart</a>
+        </div>
+            <div class="bg-white shadow rounded overflow-hidden group">
+            <div class="group relative rounded overflow-hidden">
+                <img src="{% static 'img/placeholder.png' %}" alt="product 1" class="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="view product">
+                        <img src="{% static 'icons/search.svg' %}" alt="search">
+                    </a>
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
+                        <img src="{% static 'icons/favorite.svg' %}" alt="favorite">
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-4 pb-3 px-4">
+                <a href="#">
+                    <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer Chair
+                    </h4>
+                </a>
+                <div class="flex items-baseline mb-1 space-x-2">
+                    <p class="text-xl text-primary font-semibold">$45.00</p>
+                    <p class="text-sm text-gray-400 line-through">$55.90</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex gap-1 text-sm text-yellow-400">
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star_half.svg' %}"></span>
+                    </div>
+                    <div class="text-xs text-gray-500 ml-3">(150)</div>
+                </div>
+            </div>
+            <a href="#" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                    to cart</a>
+        </div>
+            <div class="bg-white shadow rounded overflow-hidden group">
+            <div class="group relative rounded overflow-hidden">
+                <img src="{% static 'img/placeholder.png' %}" alt="product 1" class="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="view product">
+                        <img src="{% static 'icons/search.svg' %}" alt="search">
+                    </a>
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
+                        <img src="{% static 'icons/favorite.svg' %}" alt="favorite">
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-4 pb-3 px-4">
+                <a href="#">
+                    <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer Chair
+                    </h4>
+                </a>
+                <div class="flex items-baseline mb-1 space-x-2">
+                    <p class="text-xl text-primary font-semibold">$45.00</p>
+                    <p class="text-sm text-gray-400 line-through">$55.90</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex gap-1 text-sm text-yellow-400">
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star_half.svg' %}"></span>
+                    </div>
+                    <div class="text-xs text-gray-500 ml-3">(150)</div>
+                </div>
+            </div>
+            <a href="#" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                    to cart</a>
+        </div>
+            <div class="bg-white shadow rounded overflow-hidden group">
+            <div class="group relative rounded overflow-hidden">
+                <img src="{% static 'img/placeholder.png' %}" alt="product 1" class="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="view product">
+                        <img src="{% static 'icons/search.svg' %}" alt="search">
+                    </a>
+                    <a href="#" class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
+                        <img src="{% static 'icons/favorite.svg' %}" alt="favorite">
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-4 pb-3 px-4">
+                <a href="#">
+                    <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer Chair
+                    </h4>
+                </a>
+                <div class="flex items-baseline mb-1 space-x-2">
+                    <p class="text-xl text-primary font-semibold">$45.00</p>
+                    <p class="text-sm text-gray-400 line-through">$55.90</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex gap-1 text-sm text-yellow-400">
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star.svg' %}"></span>
+                        <span><img src="{% static 'icons/star_half.svg' %}"></span>
+                    </div>
+                    <div class="text-xs text-gray-500 ml-3">(150)</div>
+                </div>
+            </div>
+            <a href="#" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                    to cart</a>
+        </div>
+        </div>
+    </div>
+    <!-- ./related product -->
+
+    
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock content %}
