@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from basket.basket import Cart
-#from orders.views import payment_confirmation
+from orders.views import payment_confirmation
 
 @login_required
 def checkout(request):
@@ -24,7 +24,7 @@ def checkout(request):
     )
 
     return render(request, 'payment/checkout.html', {'client_secret': intent.client_secret})
-"""
+
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -48,4 +48,3 @@ def order_placed(request):
     cart = Cart(request)
     cart.clear()
     return render(request, 'payment/orderplaced.html')
-"""

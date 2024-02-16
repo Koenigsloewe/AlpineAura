@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-tlxxszk%_%--q4)$6oin0ter%9_$rfo+=e^j9=v0y1co5-625x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'basket',
     'account',
     'payment',
-    #'orders',
+    'orders',
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -154,6 +154,8 @@ LOGIN_URL = '/account/login/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Stripe
-PUBLISHABLE_KEY = 'pk_test_51OjR38HrB7JipLatt8OXGLjGJS3Cb0n8o6j3qT40CHOUwxFLkPYLMVawcdHa9KeBsnGOUSloYjeC6B5pdEEcWkKf00K0eevy5D'
-SECRET_KEY = 'sk_test_51OjR38HrB7JipLatLYv6fQK2Wd6TKpSdbeXyLZOzCm2lALP59jboreXHSRrJOBN0nVpmOohq9hCO4O79YNWDDV7O00X1qOhj6Q'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OjR38HrB7JipLatt8OXGLjGJS3Cb0n8o6j3qT40CHOUwxFLkPYLMVawcdHa9KeBsnGOUSloYjeC6B5pdEEcWkKf00K0eevy5D'
+STRIPE_SECRET_KEY = 'sk_test_51OjR38HrB7JipLatLYv6fQK2Wd6TKpSdbeXyLZOzCm2lALP59jboreXHSRrJOBN0nVpmOohq9hCO4O79YNWDDV7O00X1qOhj6Q'
 STRIPE_ENDPOINT_SECRET = ' whsec_12dbb64508701c86d8817c0230444065a696914074240c8688e6e2fa7ec9ed1d '
+
+CART_SESSION_ID = 'cart'

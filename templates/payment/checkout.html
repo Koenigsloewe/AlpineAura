@@ -15,8 +15,8 @@
     <!-- ./breadcrumb -->
 
     <!-- wrapper -->
-    <form id="payment-form" action="post" method="post" class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
-
+    <form id="payment-form" method="post" action="/orders/add/" class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
+    {% csrf_token %}
         <div class="col-span-8 border border-gray-200 p-4 rounded-md shadow-sm">
             <h3 class="text-xl font-semibold capitalize mb-6 text-gray-800">Checkout Details</h3>
             <div class="space-y-6 pb-12">
@@ -127,9 +127,6 @@
 
     </form>
     <!-- ./wrapper -->
-    <script>
-    var CSRF_TOKEN = '{% csrf_token %}';
-    </script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{% static 'js/checkout.js' %}"></script>
 

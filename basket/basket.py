@@ -1,4 +1,7 @@
 from decimal import Decimal, ROUND_HALF_UP
+
+from django.conf import settings
+
 from store.models import Product
 
 
@@ -6,10 +9,10 @@ class Cart:
 
     def __init__(self, request):
         self.session = request.session
-        cart = self.session.get('session_key')
+        cart = self.session.get(settings.CART_SESSION_ID)
 
-        if 'session_key' not in request.session:
-            cart = self.session['session_key'] = {}
+        if settings.CART_SESSION_ID not in request.session:
+            cart = self.session[settings.CART_SESSION_ID] = {}
 
         self.cart = cart
 
@@ -70,5 +73,5 @@ class Cart:
         self.session.modified = True
 
     def clear(self):
-        del self.session['session_key']
+        del self.session[settings.CART_SESSION_ID]
         self.save()

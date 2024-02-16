@@ -8,6 +8,7 @@ Give me full detailed description of picture(s) and the fitting topic (What belo
 todos
 edit profile and delete should be as ajax refactored (https://www.youtube.com/watch?v=ncsCnC3Ynlw&list=PLOLrQ9Pn6caxY4Q1U9RjO1bulQp5NDYS_&index=8)
 setup confirmation order placed as email
+include shipping in cart.py
 fix svg issues
 account html for account options page
 blog breadcrumb

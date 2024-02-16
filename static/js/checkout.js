@@ -3,8 +3,8 @@ var stripe = Stripe('pk_test_51OjR38HrB7JipLatt8OXGLjGJS3Cb0n8o6j3qT40CHOUwxFLkP
 var elements = stripe.elements();
 var style = {
     base: {
-        color: "#000", // Make sure the color value is correctly formatted
-        lineHeight: '2.4',
+        color: "#000",
+        lineHeight: '2',
         fontSize: '16px'
     }
 };
@@ -25,9 +25,12 @@ card.on('change', function(event) {
 
 var form = document.getElementById('payment-form');
 
-form.addEventListener('submit', function (ev) { // Corrected 'submet' to 'submit'
+form.addEventListener('submit', function (ev) {
     ev.preventDefault();
-    document.getElementById('submit').disabled = true; // Disable the button to prevent multiple submissions
+
+    document.getElementById('submit').disabled = true;
+
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     var firstName = document.getElementById('first-name').value;
     var lastName = document.getElementById('last-name').value;
@@ -36,38 +39,59 @@ form.addEventListener('submit', function (ev) { // Corrected 'submet' to 'submit
     var address = document.getElementById('address').value;
     var city = document.getElementById('city').value;
     var region = document.getElementById('region').value;
-    var clientSecret = document.getElementById('submit').getAttribute('data-secret'); // Ensure you have the clientSecret
+    var clientSecret = document.getElementById('submit').getAttribute('data-secret');
 
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-            billing_details: {
-                name: firstName + ' ' + lastName,
-                email: email,
-                phone: phone,
-                address: {
-                    line1: address,
-                    city: city,
-                    state: region,
-                    // Add country and postal_code if needed
+    $.ajax({
+        type: "POST",
+        url: 'http://127.0.0.1:8000/orders/add/',
+        data: {
+            order_key: clientSecret,
+            csrfmiddlewaretoken: csrfToken,
+            action: "post"
+        },
+        success: function (json) {
+            console.log(json.success);
+
+            stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: firstName + ' ' + lastName,
+                        email: email,
+                        phone: phone,
+                        address: {
+                            line1: address,
+                            city: city,
+                            state: region,
+                        }
+                    }
                 }
-            }
-        }
-    }).then(function(result) {
-        if (result.error) {
-            // Show error in #card-errors element
-            var errorElement = document.getElementById('card-errors');
-            errorElement.textContent = result.error.message;
+            }).then(function(result) {
+                if (result.error) {
 
-            // Re-enable the submit button
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+
+                    document.getElementById('submit').disabled = false;
+                } else {
+
+                    if (result.paymentIntent.status === 'succeeded') {
+
+                        console.log("Payment succeeded!");
+                        window.location.replace("http://127.0.0.1:8000/payment/orderplaced/");
+
+                    }
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            // Handle the error here
+            console.error("Error in AJAX request: " + status + " - " + error);
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = "Error processing your order. Please try again.";
+            $('#card-errors').addClass('alert alert-danger');
+
             document.getElementById('submit').disabled = false;
-        } else {
-            // The payment has been processed!
-            if (result.paymentIntent.status === 'succeeded') {
-                // Payment succeeded, show a confirmation message
-                console.log("Payment succeeded!");
-                // Redirect to success page or update UI accordingly
-            }
         }
     });
 });
