@@ -1,4 +1,5 @@
 {% extends 'store/main.html' %}
+{% block title %}Checkout{% endblock title %}
 {% load static %}
 {% block content %}
 
@@ -127,6 +128,14 @@
 
     </form>
     <!-- ./wrapper -->
+    <script>
+        var STRIPE_PUBLISHABLE_KEY = '{{ STRIPE_PUBLISHABLE_KEY }}'
+        var fullName = '{{ selected_address.full_name }}'
+        var address1 = '{{ selected_address.address1 }}'
+        var address2 = '{{ selected_address.address2 }}'
+        var postCode = '{{ selected_address.post_code }}'
+        var country = '{{ selected_address.country_code }}'
+    </script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{% static 'js/checkout.js' %}"></script>
 

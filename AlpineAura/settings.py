@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    'mptt',
     ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -147,15 +148,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_USER_MODEL = 'account.UserBase'
+AUTH_USER_MODEL = 'account.Customer'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = ['127.0.0.1', 'localhost']
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+RECIPIENT_LIST = ['admin@admin.com']
 
 # Stripe
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OjR38HrB7JipLatt8OXGLjGJS3Cb0n8o6j3qT40CHOUwxFLkPYLMVawcdHa9KeBsnGOUSloYjeC6B5pdEEcWkKf00K0eevy5D'
-STRIPE_SECRET_KEY = 'sk_test_51OjR38HrB7JipLatLYv6fQK2Wd6TKpSdbeXyLZOzCm2lALP59jboreXHSRrJOBN0nVpmOohq9hCO4O79YNWDDV7O00X1qOhj6Q'
-STRIPE_ENDPOINT_SECRET = ' whsec_12dbb64508701c86d8817c0230444065a696914074240c8688e6e2fa7ec9ed1d '
+os.environ.setdefault('STRIPE_PUBLISHABLE_KEY','')
+STRIPE_SECRET_KEY = ''
+STRIPE_ENDPOINT_SECRET = '  '
+
+# Paypal
+os.environ.setdefault('PAYPAL_CLIENT_ID', '')
+PAYPAL_CLIENT_SECRET = ''
 
 CART_SESSION_ID = 'cart'
+
+

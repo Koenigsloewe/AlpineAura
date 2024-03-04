@@ -1,0 +1,43 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold my-8">My Wishlist</h2>
+    {% for product in wishlist %}
+    <div class="flex bg-white rounded-lg overflow-hidden shadow-lg mb-4">
+        <!-- Product Image -->
+        <div class="w-1/6 bg-blue-300"> <!-- Placeholder for image -->
+            {% for image in product.product_image.all %}
+                {% if image.is_featured %}
+                    <img src="{{ image.image.url }}" alt="{{ image.image.alt_text }}" class="object-cover h-full w-full">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Product Details -->
+        <div class="w-5/6 p-4 flex flex-col justify-between">
+            <div>
+                <h3 class="text-2xl font-semibold">{{ product.product_title }}</h3>
+                <p class="text-gray-600">{{ product.description|truncatechars:255 }}</p>
+                <div class="my-2">
+                    {% if product.discount_price %}
+                        <span class="text-lg font-bold text-primary">${{ product.discount_price }}</span>
+                        <span class="text-sm line-through">${{ product.regular_price }}</span>
+                    {% else %}
+                        <span class="text-lg font-bold text-primary">${{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <a href="{{ product.get_absolute_url }}" class="text-primary hover:underline">View Product</a>
+                <a href="{% url 'account:delete_item_to_wishlist' product.id %}" class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded transition ease-in-out duration-150">
+                    Remove from Wishlist
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Your wishlist is empty.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

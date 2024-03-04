@@ -1,203 +1,68 @@
-{% extends 'store/main.html' %} {% load static %} {% block content %}
+{% extends 'store/main.html' %}
 
+{% block title %}
+Account Dashboard
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
 <!-- breadcrumb -->
-<div class="container py-4 flex items-center gap-3">
+<div class="container mx-auto py-4 flex items-center gap-3">
     <a href="{% url 'store:home' %}" class="text-primary text-base">
-        <img class="" src="{% static 'icons/home.svg' %}">
+        <img src="{% static 'icons/home.svg' %}" alt="Home">
     </a>
-    <span class="text-sm text-gray-400">
-            <img class="" src="{% static 'icons/chevron_right.svg' %}">
-        </span>
-    <p class="text-gray-600 font-medium">Account</p>
+    <img src="{% static 'icons/chevron_right.svg' %}" alt=">" class="text-sm text-gray-400">
+    <p class="text-gray-600 font-medium">Dashboard</p>
 </div>
 <!-- ./breadcrumb -->
 
 <!-- account wrapper -->
-<div class="container grid grid-cols-1 md:grid-cols-12 gap-6 pt-4 pb-16">
+<div class="container mx-auto mt-4 pb-16 max-w-7xl">
+    <div class="grid md:grid-cols-3 gap-6">
+        <!-- Orders -->
+        <a href="{% url 'account:user_orders' %}" class="bg-white shadow-lg rounded-lg p-8 hover:bg-gray-100 transition">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'icons/orders.svg' %}" alt="Orders" class="h-12 w-12">
+                <div>
+                    <span class="block text-gray-800 font-medium text-lg">Orders</span>
+                    <p class="text-sm text-gray-600">View your order history</p>
+                </div>
+            </div>
+        </a>
 
-    <!-- sidebar -->
-    <div class="col-span-1 md:col-span-3">
-        <div class="px-4 py-3 shadow flex items-center gap-4">
-            <div class="flex-shrink-0">
-                <img src="{% static 'img/profile_picture.png' %}" alt="profile picture" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
+        <!-- Login Security -->
+        <a href="{% url 'account:edit_details' %}" class="bg-white shadow-lg rounded-lg p-8 hover:bg-gray-100 transition">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'icons/security.svg' %}" alt="Security" class="h-12 w-12">
+                <div>
+                    <span class="block text-gray-800 font-medium text-lg">Login & Security</span>
+                    <p class="text-sm text-gray-600">Manage your login details</p>
+                </div>
             </div>
-            <div class="flex-grow">
-                <p class="text-gray-600">Hello,</p>
-                <h4 class="text-gray-800 font-medium">John Doe</h4>
-            </div>
-        </div>
+        </a>
 
-        <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
-            <div class="space-y-1 pl-8">
-                <button class="relative text-primary block font-medium capitalize transition" id="manageAccountBtn">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <img src="{% static 'icons/badge.svg' %}">
-                    </span>
-                    Manage account
-                </button>
-                <button class="relative hover:text-primary block capitalize transition" id="profileInfoBtn">
-                    Profile information
-                </button>
-                <button class="relative hover:text-primary block capitalize transition">
-                    Manage addresses
-                </button>
-                <button class="relative hover:text-primary block capitalize transition">
-                    Change password
-                </button>
+        <!-- Addresses -->
+        <a href="{% url 'account:addresses' %}" class="bg-white shadow-lg rounded-lg p-8 hover:bg-gray-100 transition">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'icons/local_shipping.svg' %}" alt="Addresses" class="h-12 w-12">
+                <div>
+                    <span class="block text-gray-800 font-medium text-lg">Addresses</span>
+                    <p class="text-sm text-gray-600">Edit your shipping addresses</p>
+                </div>
             </div>
-
-            <div class="space-y-1 pl-8 pt-4">
-                <button class="relative hover:text-primary block font-medium capitalize transition">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <img src="{% static 'icons/history.svg' %}">
-                    </span>
-                    My order history
-                </button>
-                <button class="relative hover:text-primary block capitalize transition">
-                    My returns
-                </button>
-                <button class="relative hover:text-primary block capitalize transition">
-                    My Cancellations
-                </button>
-                <button class="relative hover:text-primary block capitalize transition">
-                    My reviews
-                </button>
-            </div>
-
-            <div class="space-y-1 pl-8 pt-4">
-                <button class="relative hover:text-primary block font-medium capitalize transition">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <img src="{% static 'icons/credit_card.svg' %}">
-                    </span>
-                    Payment methods
-                </button>
-                <button href="#" class="relative hover:text-primary block capitalize transition">
-                    voucher
-                </button>
-            </div>
-
-            <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <img src="{% static 'icons/favorite.svg' %}">
-                    </span> My wishlist
-                </a>
-            </div>
-
-            <div class="space-y-1 pl-8 pt-4">
-                <a href="{% url 'account:logout' %}" class="relative hover:text-primary block font-medium capitalize transition">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <img src="{% static 'icons/arrow_back.svg' %}">
-                    </span> Logout
-                </a>
-            </div>
-
-        </div>
-    </div>
-    <!-- ./sidebar -->
-    
-    <div class="col-span-1 md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-4" id="manageAccountContent">
-
-
-        <div class="col-span-1 md:col-span-3 lg:col-span-1 shadow rounded bg-white px-4 pt-6 pb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="font-medium text-gray-800 text-lg">Personal Profile</h3>
-                <a href="#" class="text-primary">Edit</a>
-            </div>
-            <div class="space-y-1">
-                <h4 class="text-gray-700 font-medium">John Doe</h4>
-                <p class="text-gray-800">example@mail.com</p>
-                <p class="text-gray-800">0811 8877 988</p>
-            </div>
-        </div>
-
-        <div class="col-span-1 md:col-span-3 lg:col-span-1 shadow rounded bg-white px-4 pt-6 pb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="font-medium text-gray-800 text-lg">Shipping address</h3>
-                <a href="#" class="text-primary">Edit</a>
-            </div>
-            <div class="space-y-1">
-                <h4 class="text-gray-700 font-medium">John Doe</h4>
-                <p class="text-gray-800">Medan, North Sumatera</p>
-                <p class="text-gray-800">20371</p>
-                <p class="text-gray-800">0811 8877 988</p>
-            </div>
-        </div>
-
-        <div class="col-span-1 md:col-span-3 lg:col-span-1 shadow rounded bg-white px-4 pt-6 pb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="font-medium text-gray-800 text-lg">Billing address</h3>
-                <a href="#" class="text-primary">Edit</a>
-            </div>
-            <div class="space-y-1">
-                <h4 class="text-gray-700 font-medium">John Doe</h4>
-                <p class="text-gray-800">Medan, North Sumatera</p>
-                <p class="text-gray-800">20317</p>
-                <p class="text-gray-800">0811 8877 988</p>
-            </div>
-        </div>
+        </a>
         
+        <!-- Wishlist -->
+        <a href="{% url 'account:wishlist' %}" class="bg-white shadow-lg rounded-lg p-8 hover:bg-gray-100 transition">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'icons/favorite.svg' %}" alt="Wishlist" class="h-12 w-12">
+                <div>
+                    <span class="block text-gray-800 font-medium text-lg">Wishlist</span>
+                    <p class="text-sm text-gray-600">View and manage your wishlist</p>
+                </div>
+            </div>
+        </a>
     </div>
-    <div id="profileInformationContent" class="shadow-lg rounded-lg bg-white p-6 md:max-w-xl lg:max-w-2xl mx-auto">
-    <div class="mb-4">
-        <h3 class="font-semibold text-gray-800 text-xl md:text-2xl border-b pb-2">Edit Profile Information</h3>
-    </div>
-    <form action="#" method="POST" class="space-y-6">
-        {% csrf_token %}
-        <div>
-            <label for="fullName" class="block text-md font-medium text-gray-700">Full Name</label>
-            <input type="text" name="fullName" id="fullName" autocomplete="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ user.get_full_name }}">
-        </div>
-        <div>
-            <label for="emailAddress" class="block text-md font-medium text-gray-700">Email address</label>
-            <input type="text" name="email" id="emailAddress" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ user.email }}">
-        </div>
-        <div>
-            <label for="phone" class="block text-md font-medium text-gray-700">Phone Number</label>
-            <input type="text" name="phone" id="phone" autocomplete="tel" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ profile.phone }}">
-        </div>
-        <div class="flex justify-end">
-            <button type="submit" class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">Save Changes</button>
-        </div>
-    </form>
 </div>
-
-
-
-</div>
-<!-- ./account wrapper -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const manageAccountBtn = document.getElementById('manageAccountBtn');
-        const profileInfoBtn = document.getElementById('profileInfoBtn');
-        const manageAccountContent = document.getElementById('manageAccountContent');
-        const profileInfoContent = document.getElementById('profileInformationContent');
-    
-        // Function to hide all contents
-        function hideAllContents() {
-            manageAccountContent.classList.add('hidden');
-            profileInfoContent.classList.add('hidden');
-        }
-    
-        // Function to show content
-        function showContent(content) {
-            hideAllContents(); // First, hide all contents
-            content.classList.remove('hidden'); // Then, show the requested content
-        }
-    
-        // Initially show manage account content
-        showContent(manageAccountContent); // You might not need this line if manageAccountContent is visible by default
-    
-        // Event listener for Manage Account Button
-        manageAccountBtn.addEventListener('click', function() {
-            showContent(manageAccountContent);
-        });
-    
-        // Event listener for Profile Information Button
-        profileInfoBtn.addEventListener('click', function() {
-            showContent(profileInfoContent);
-        });
-    });
-</script>
 {% endblock content %}

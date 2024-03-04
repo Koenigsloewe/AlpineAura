@@ -1,0 +1,83 @@
+{% extends 'store/main.html' %}
+{% block title %}Delivery Options{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="container mx-auto mt-10">
+
+        <!-- django messages -->
+        <div id="message" class="container mx-auto my-4 px-4">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flex items-center bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 shadow-md"
+                         role="alert">
+                        <img class="p-1" src="{% static 'icons/info.svg' %}">
+                        <div>
+                            <p class="font-bold">Notification</p>
+                            <p class="text-sm">{{ message }}</p>
+                        </div>
+                        <div class="ml-auto pl-4">
+                            <button class="close-button text-sm text-blue-500 focus:outline-none"
+                                    onclick="this.parentElement.parentElement.style.display='none';">
+                                <img src="{% static 'icons/close.svg' %}">
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <!-- end django messages -->
+
+        <div class="flex flex-wrap md:flex-nowrap">
+            <!-- Left Column: Delivery Options -->
+            <div class="w-full md:w-2/3 bg-white px-4 py-6">
+                <h2 class="font-semibold text-2xl border-b pb-8 px-6">Delivery Options</h2>
+                <form action="#" method="post">
+                    <fieldset>
+                        {% for option in delivery_options %}
+                            <!-- Delivery Option Card -->
+                            <div class="mt-4 flex items-center bg-gray-100 rounded-lg shadow px-6 py-4">
+                                <input type="radio" id="{{ option.id }}" name="delivery_option" value="{{ option.id }}"
+                                       class="mr-3 h-4 w-4" data-url="{% url 'payment:cart_update_delivery' %}"
+                                       data-csrf-token="{{ csrf_token }}"
+                                {% if request.session.purchase.delivery_id == option.id %}checked{% endif %}>
+                                <img src="{% static 'icons/local_shipping.svg' %}" alt="Delivery Icon"
+                                     class="h-6 w-6 mr-3">
+                                <div class="flex flex-col">
+                                    <label for="delivery{{ option.id }}"
+                                           class="font-medium text-lg leading-tight">{{ option.get_delivery_method_display }}
+                                        - €{{ option.delivery_price }}</label>
+                                    <p class="text-sm text-gray-600">{{ option.delivery_name }} - Delivery
+                                        Timeframe: {{ option.delivery_timeframe }},
+                                        Window: {{ option.delivery_window }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                </form>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="w-full md:w-1/3 bg-gray-100 px-8 py-10 ml-0 md:ml-8 mt-10 md:mt-0">
+                <h2 class="font-semibold text-xl border-b pb-8">Order Summary</h2>
+                <div class="mt-8">
+                    <div class="flex justify-between mb-4">
+                        <span>Subtotal</span>
+                        <span>{{ Cart.get_subtotal_price }} €</span>
+                    </div>
+                    <div class="flex justify-between mb-4">
+                        <span>Delivery Cost</span>
+                        <span id="deliveryCost">{{ Cart.get_delivery_price }}</span>
+                    </div>
+                    <div class="flex justify-between mb-4 font-semibold text-lg">
+                        <span>Total Cost</span>
+                        <span id="totalCost">{{ Cart.get_total_price }} €</span>
+                    </div>
+                    <a href="{% url 'payment:delivery_address' %}"
+                       class="block w-full py-3 px-4 text-center text-white bg-primary rounded-md hover:bg-primary-dark transition font-medium">Pay
+                        Securely</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/delivery_options.js' %}"></script>
+{% endblock content %}

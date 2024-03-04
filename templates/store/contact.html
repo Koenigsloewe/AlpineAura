@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container py-4 flex items-center gap-3">
-        <a href="{% url 'home' %}" class="text-primary text-base">
+        <a href="{% url 'store:home' %}" class="text-primary text-base">
             <img class="" src="{% static 'icons/home.svg' %}">
         </a>
         <span class="text-sm text-gray-400">
@@ -11,6 +11,29 @@
         </span>
         <p class="text-gray-600 font-medium">Contact</p>
     </div>
+    
+    <!-- django messages -->
+    <div id="message" class="container mx-auto my-4 px-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flex items-center bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 shadow-md"
+                     role="alert">
+                    <img class="p-1" src="{% static 'icons/info.svg' %}">
+                    <div>
+                        <p class="font-bold">Notification</p>
+                        <p class="text-sm">{{ message }}</p>
+                    </div>
+                    <div class="ml-auto pl-4">
+                        <button class="close-button text-sm text-blue-500 focus:outline-none"
+                                onclick="this.parentElement.parentElement.style.display='none';">
+                            <img src="{% static 'icons/close.svg' %}">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <!-- end django messages -->
 
     <div class="container mx-auto p-5">
         <h1 class="text-2xl font-bold text-center mb-4">Contact Us</h1>
@@ -51,7 +74,8 @@
                 </div>
             </div>
 
-            <form action="#" method="post">
+            <form action="{% url 'store:contact' %}" method="post">
+                {% csrf_token %}
                 <h3 class="font-semibold mb-4">Send Us a Message</h3>
                 <div class="mb-4">
                     <label for="name" class="block mb-2">Name</label>

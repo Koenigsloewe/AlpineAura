@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#decrease-qty').click(function(e) {
+$(document).ready(function () {
+    $('#decrease-qty').click(function (e) {
         e.preventDefault();
         var qtyInput = $('#product-qty');
         var currentQty = parseInt(qtyInput.val());
@@ -8,16 +8,19 @@ $(document).ready(function() {
         }
     });
 
-    $('#increase-qty').click(function(e) {
+    $('#increase-qty').click(function (e) {
         e.preventDefault();
         var qtyInput = $('#product-qty');
         var currentQty = parseInt(qtyInput.val());
         qtyInput.val(currentQty + 1);
     });
 
-    $('#add-button').click(function(e) {
+    $('#add-button').click(function (e) {
         e.preventDefault();
         var button = $(this);
+        var infoIconUrl = button.data('info-icon');
+        var closeIconUrl = button.data('close-icon');
+
         $.ajax({
             type: 'POST',
             url: button.data('url'),
@@ -27,16 +30,31 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: button.data('csrf-token'),
                 action: 'post'
             },
-            success: function(json) {
+            success: function (json) {
                 document.getElementById('cart-qty').innerHTML = json.qty
+                console.log(json.message)
+                console.log(json)
+
+                let messagesContainer = document.getElementById('messages-container');
+                messagesContainer.innerHTML = `<div class="flex items-center justify-between bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 shadow-md" role="alert">
+                                    <div class="flex items-center">
+                                        <img class="h-6 w-6 mr-2" src="${infoIconUrl}" alt="Info">
+                                        <p class="font-bold mr-4">Notification</p>
+                                        <p class="text-sm">${json.message}</p>
+                                    </div>
+                                    <button class="close-button text-sm text-blue-500 focus:outline-none" onclick="this.parentElement.style.display='none';">
+                                        <img src="${closeIconUrl}" alt="Close" class="h-6 w-6">
+                                    </button>
+                               </div>`;
+                messagesContainer.style.display = 'block';
             },
-            error: function(xhr, errmsg, err) {
+            error: function (xhr, errmsg, err) {
                 console.log(errmsg);
             }
         });
     });
 
-    $(document).on('click', '.delete-button', function(e) {
+    $(document).on('click', '.delete-button', function (e) {
         e.preventDefault();
         var prodId = $(this).data('index');
         var button = $(this);
@@ -48,12 +66,12 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: button.data('csrf-token'),
                 action: 'post'
             },
-            success: function(json) {
-                $('.product-item[data-index="' + prodId +'"]').remove();
+            success: function (json) {
+                $('.product-item[data-index="' + prodId + '"]').remove();
                 document.getElementById("items-count").innerHTML = json.qty + ' Items';
-                 document.getElementById("cart-qty").innerHTML = json.qty;
+                document.getElementById("cart-qty").innerHTML = json.qty;
             },
-            error: function(xhr, errmsg, err) {
+            error: function (xhr, errmsg, err) {
                 console.log(errmsg);
             }
         });

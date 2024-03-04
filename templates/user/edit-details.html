@@ -1,0 +1,56 @@
+{% extends 'store/main.html' %}
+{% block title %}Edit Details{% endblock title %}
+{% load static %}
+
+{% block content %}
+<div class="container py-16">
+    <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+        <h2 class="text-2xl uppercase font-medium mb-1">Edit Your Details</h2>
+        <p class="text-gray-600 mb-6 text-sm">Update your account information</p>
+
+        <form action="#" method="post" autocomplete="off">
+            {% csrf_token %}
+            {% if user_form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Oops!</strong>
+                    <span class="block sm:inline">Something went wrong submitting your form:</span>
+                    {% for error in user_form.non_field_errors %}
+                        <span class="block sm:inline">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <div class="space-y-4">
+                {% for field in user_form %}
+                    <div>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="text-sm text-gray-600">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p class="text-red-500 text-xs italic">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">Update Details</button>
+            </div>
+        </form>
+
+        <!-- Delete Account Form -->
+        <form action="{% url 'account:delete_user' %}" method="post" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+            {% csrf_token %}
+            <div class="mt-6">
+                <button type="submit" class="block w-full py-2 text-center text-white bg-red-600 border border-red-600 rounded hover:bg-transparent hover:text-red-600 transition uppercase font-roboto font-medium">Delete Account</button>
+            </div>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-gray-600">Need to go back? <a href="{% url 'account:dashboard' %}" class="text-primary">Return to dashboard</a></p>
+        </div>
+    </div>
+</div>    
+{% endblock content %}

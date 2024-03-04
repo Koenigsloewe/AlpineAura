@@ -2,6 +2,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from django.conf import settings
 
+from payment.models import DeliveryOptions
 from store.models import Product
 
 
@@ -17,10 +18,12 @@ class Cart:
         self.cart = cart
 
     def add(self, product, product_qty):
-        product_id = product.id
+        product_id = str(product.id)
+
+        price = product.discount_price if product.discount_price else product.regular_price
 
         if product_id not in self.cart:
-            self.cart[product_id] = {'price': str(product.price), 'qty': int(product_qty)}
+            self.cart[product_id] = {'price': str(price), 'qty': int(product_qty)}
 
         self.save()
 
@@ -29,7 +32,7 @@ class Cart:
 
     def __iter__(self):
         products_id = self.cart.keys()
-        products = Product.products.filter(id__in=products_id)
+        products = Product.objects.filter(id__in=products_id)
         cart = self.cart.copy()
 
         for product in products:
@@ -41,9 +44,27 @@ class Cart:
 
             yield item
 
-    def get_total_price(self):
+    def get_subtotal_price(self):
         total_price = sum(Decimal(item['price']) * Decimal(item['qty']) for item in self.cart.values())
         return total_price
+
+    def get_delivery_price(self):
+        newprice = 0.00
+
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+
+        return newprice
+
+    def get_total_price(self):
+        newprice = 0.00
+        subtotal = self.get_subtotal_price()
+
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+
+        total = subtotal + Decimal(newprice)
+        return total
 
     def get_total_item_price(self, product_id):
         product_id = str(product_id)
@@ -74,4 +95,11 @@ class Cart:
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
+        del self.session["address"]
+        del self.session["purchase"]
         self.save()
+
+    def cart_update_delivery(self, delivery_price=0):
+        subtotal = self.get_subtotal_price()
+        total = subtotal + Decimal(delivery_price)
+        return total

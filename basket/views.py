@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .basket import Cart
 
@@ -20,8 +20,11 @@ def cart_add(request):
         product = get_object_or_404(Product, id=product_id)
         cart.add(product=product, product_qty=product_qty)
         cart_qty = cart.__len__()
-        response = JsonResponse({'qty': cart_qty})
+        response = JsonResponse(
+            {'qty': cart_qty, 'message': f"Added {product_qty} x {product.product_title} to your cart"})
         return response
+
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
 
 def cart_delete(request):
@@ -30,7 +33,7 @@ def cart_delete(request):
         product_id = int(request.POST.get('productid'))
         cart.delete(product=product_id)
         cart_qty = cart.__len__()
-        cart_total_price = cart.get_total_price()
+        cart_total_price = cart.get_subtotal_price()
         response = JsonResponse({'qty': cart_qty, 'subtotal': cart_total_price})
         return response
 
@@ -42,7 +45,7 @@ def cart_update(request):
         product_qty = int(request.POST.get('productqty'))
         cart.update(product_id=product_id, product_qty=product_qty)
         cart_qty = cart.__len__()
-        cart_total_price = cart.get_total_price()
+        cart_total_price = cart.get_subtotal_price()
         total_item_price = cart.get_total_item_price(product_id)
         response = JsonResponse({'qty': cart_qty, 'subtotal': cart_total_price, 'totalItemPrice': total_item_price})
         return response

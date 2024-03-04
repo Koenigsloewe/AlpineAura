@@ -1,5 +1,6 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% block title %}Login{% endblock title %}
 {% block content %}
 
     <!-- login -->
@@ -42,6 +43,8 @@
 
             <p class="mt-4 text-center text-gray-600">Don't have account? <a href="{% url 'account:register' %}"
                     class="text-primary">Register now</a></p>
+            <p class="mt-4 text-center text-gray-600">Forgotten Password? <a href="{% url 'account:reset_password' %}"
+                    class="text-primary">Reset Password</a></p>
         </div>
     </div>
     <!-- ./login -->

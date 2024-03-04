@@ -43,26 +43,29 @@ module.exports = {
 
     ],
     theme: {
-    screen: {
-      sm: "576px",
-      md: "768px",
-      lg: "992px",
-      xl: "1200px",
+        screen: {
+            sm: "576px",
+            md: "768px",
+            lg: "992px",
+            xl: "1200px",
+        },
+        container: {
+            center: true,
+            padding: "1rem",
+        },
+        extend: {
+            fontFamily: {
+                poppins: ["Playfair Display ", "serif"],
+                roboto: ["Roboto", "sans-serif"],
+            },
+            colors: {
+                primary: "#bda524",
+            },
+            height: {
+                '1/2screen': '50vh',
+            }
+        },
     },
-    container: {
-      center: true,
-      padding: "1rem",
-    },
-    extend: {
-      fontFamily: {
-        poppins: ["Playfair Display ", "serif"],
-        roboto: ["Roboto", "sans-serif"],
-      },
-      colors: {
-        primary: "#c0a811",
-      },
-    },
-  },
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling

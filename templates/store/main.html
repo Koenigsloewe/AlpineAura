@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock title %}</title>
+    <title>{% block title %}AlpineAura - Your Outdoor Ecommerce Shop{% endblock title %}</title>
 
     <link rel="shortcut icon" href="{% static 'img/AlpineAura.ico' %}" type="image/x-icon">
 
@@ -29,25 +29,12 @@
                 <img src="{% static 'img/AlpineAura_Logo.png' %}" alt="Logo" class="w-64 md:w-48 lg:w-40">
             </a>
 
-            <div class="w-full max-w-xl relative flex">
-                <img class="absolute left-4 top-3 text-lg text-gray-400 hidden md:flex" src="{% static 'icons/search.svg' %}" alt="Search Icon">
-                <input type="text" name="search" id="search"
-                    class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none hidden md:flex"
-                    placeholder="Search...">
-                <button
-                    class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition items-center
-                    hidden md:flex">Search</button>
-            </div>
-
             <div class="flex items-center space-x-4">
-                <a href="#" class="flex flex-col items-center text-center text-gray-700 hover:text-primary transition relative">
+                <a href="{% url 'account:wishlist' %}" class="flex flex-col items-center text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <img src="{% static 'icons/favorite.svg' %}" alt="Wishlist Icon">
                     </div>
                     <div class="text-xs leading-3">Wishlist</div>
-                    <div class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        8
-                    </div>
                 </a>
 
                 <a href="{% url 'cart:cart_summary' %}" class="flex flex-col items-center text-center text-gray-700 hover:text-primary transition relative">
@@ -90,8 +77,10 @@
                     class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
                     
                     {% for c in categories %}
-                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
-                        <img src="{% static 'icons/build.svg' %}" alt="sofa" class="w-5 h-5 object-contain">
+                    <a href="{{ c.get_absolute_url }}" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                    {% if c.icon %}
+                        <img src="{{ c.icon.url }}" alt="Icon for {{ c.name }}" class="w-5 h-5 object-contain">
+                    {% endif %}
                         <span class="ml-6 text-gray-600 text-sm">{{ c.name|title }}</span>
                     </a>
                     {% endfor %}
@@ -101,11 +90,10 @@
 
             <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
                 <div class="flex items-center space-x-6 capitalize">
-                    <a href="#" class="text-gray-200 hover:text-white transition">Home</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">Shop</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">Blog</a>
-                    <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                    <a href="{% url 'store:home' %}" class="text-gray-200 hover:text-white transition">Home</a>
+                    <a href="{% url 'store:shop' %}" class="text-gray-200 hover:text-white transition">Shop</a>
+                    <a href="{% url 'store:about' %}" class="text-gray-200 hover:text-white transition">About us</a>
+                    <a href="{% url 'store:contact' %}" class="text-gray-200 hover:text-white transition">Contact us</a>
                 </div>
                 {% if user.is_authenticated %}
                 <a href="{% url 'account:logout' %}" class="text-red-500 hover:text-white transition">Logout</a>
@@ -116,10 +104,10 @@
         </div>
     </nav>
     <!-- ./navbar -->
-
-{% block content %}
-
-{% endblock %}
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
 <!-- footer -->
 <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
     <div class="container mx-auto px-6">
@@ -141,10 +129,10 @@
             <div class="mb-4 md:mb-0">
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Customer Information</h3>
                 <div class="mt-4 space-y-4">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">About Us</a>
+                    <a href="{% url 'store:about' %}" class="text-base text-gray-500 hover:text-gray-900 block">About Us</a>
                     <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Shop</a>
                     <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Blog</a>
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Contact Us</a>
+                    <a href="{% url 'store:contact' %}" class="text-base text-gray-500 hover:text-gray-900 block">Contact Us</a>
                 </div>
             </div>
 
@@ -152,10 +140,10 @@
             <div class="mb-4 md:mb-0">
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Resources & Policies</h3>
                 <div class="mt-4 space-y-4">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Size Guides</a>
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Shipping and Returns Policy</a>
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Privacy Policy</a>
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Terms of Service</a>
+                    <a href="{% url 'store:size guides' %}" class="text-base text-gray-500 hover:text-gray-900 block">Size Guides</a>
+                    <a href="{% url 'store:return policy' %}" class="text-base text-gray-500 hover:text-gray-900 block">Shipping and Returns Policy</a>
+                    <a href="{% url 'store:privacy policy' %}" class="text-base text-gray-500 hover:text-gray-900 block">Privacy Policy</a>
+                    <a href="{% url 'store:terms of service' %}" class="text-base text-gray-500 hover:text-gray-900 block">Terms of Service</a>
                 </div>
             </div>
 

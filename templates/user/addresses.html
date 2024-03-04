@@ -1,0 +1,50 @@
+{% extends 'store/main.html' %}
+{% block title %}View Addresses{% endblock title %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Addresses</h2>
+        <a href="{% url 'account:add_address' %}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add New Address
+        </a>
+    </div>
+    <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
+        <!-- Dynamic address cards start -->
+        {% for address in addresses %}
+        <div class="bg-white shadow rounded-lg p-4">
+            <h3 class="text-xl font-medium text-gray-700">{{ address.full_name }}</h3>
+            <p class="text-gray-600">{{ address.address_line }}</p>
+            <p class="text-gray-600">{{ address.town_city }}, {{ address.postcode }}</p>
+            <p class="text-gray-600">{{ address.country }}</p>
+            
+            <div class="mt-4 flex justify-between items-center">
+                {% if address.default_address %}
+                    <span class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Default</span>
+                {% endif %}
+                <div class="flex gap-2">
+                    <a href="{% url 'account:edit_address' address.id %}" class="text-blue-500 hover:text-blue-600 text-sm font-medium">Edit</a>
+                    <a href="{% url 'account:delete_address' address.id %}" class="text-red-500 hover:text-red-600 text-sm font-medium">Delete</a>
+                    {% if not address.default_address %}
+                    <a href="{% url 'account:set_default' address.id %}" class="text-green-500 hover:text-green-600 text-sm font-medium">Set Default</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Placeholder for adding new address -->
+        <div class="flex justify-center items-center bg-white shadow rounded-lg p-4 cursor-pointer hover:bg-gray-100">
+            <a href="{% url 'account:add_address' %}" class="flex flex-col items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span class="text-gray-700 mt-2">Add New Address</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

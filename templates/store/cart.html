@@ -1,97 +1,75 @@
-{% extends 'store/main.html' %} {% load static %} {% block content %}
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
 <div class="container mx-auto mt-10">
-    <div class="flex shadow-lg my-10">
+    <div class="shadow-lg my-10">
         <!-- Shopping Cart Section -->
-        <div class="w-3/4 bg-white px-10 py-10">
+        <div class="bg-white px-10 py-10">
             <div class="flex justify-between border-b pb-8">
                 <h1 class="font-semibold text-2xl">Shopping Cart</h1>
-                <h2 id="items-count" class="font-semibold text-2xl">{% with total_qty=Cart|length %}
-                            {% if total_qty > 0 %}
-                                {{ total_qty }}
-                            {% else %}
-                                0
-                            {% endif %}
-                        {% endwith %}
-                    
-                    Items</h2>
+                <h2 id="items-count" class="font-semibold text-2xl">
+                    {% with total_qty=Cart|length %}
+                        {% if total_qty > 0 %}{{ total_qty }}{% else %}0{% endif %}
+                    {% endwith %} Items
+                </h2>
             </div>
 
             {% for item in Cart %} {% with product=item.product %}
-            <div data-index="{{product.id}}" class="product-item">
+            <div data-index="{{ product.id }}" class="product-item">
                 <div class="flex mt-5 mb-5 items-center">
                     <div class="w-2/5">
-                        <img src="{{ product.image.url }}" class="w-20 h-20">
+                        {% for image in product.product_image.all %} {% if image.is_featured %}
+                        <img src="{{ image.image.url }}" alt="{{ image.image.alt_text }}" class="w-20 h-20">
+                        {% endif %} {% endfor %}
                     </div>
                     <div class="w-2/5 flex flex-col justify-between ml-4">
-                        <span class="font-bold text-sm">{{ product.title }}</span>
-                        <span class="text-red-500 text-xs">€{{ product.price }}</span>
+                        <span class="font-bold text-sm">{{ product.product_title }}</span>
+                        <span class="text-xs">
+                            {% if product.discount_price %}
+                            <span class="text-red-500"> {{ product.discount_price }} € </span>
+                            <span class="text-gray-500 line-through"> {{ product.regular_price }} € </span> 
+                            {% else %}
+                            <span class="text-black"> {{ product.regular_price }} € </span> 
+                            {% endif %}
+                        </span>
+
                         <div class="flex items-center mt-2">
-                            <!-- Decrease Quantity Button -->
-                            <button type="button" data-index="{{product.id}}" data-url="{% url 'cart:cart_update' %}" data-csrf-token="{{ csrf_token }}" class="decrease-qty text-gray-500 focus:outline-none focus:text-gray-600 update-button"><img src="{% static 'icons/remove.svg' %}"></button>
-                            <!-- Quantity Input -->
+                            <button type="button" data-index="{{ product.id }}" data-url="{% url 'cart:cart_update' %}" data-csrf-token="{{ csrf_token }}" class="decrease-qty text-gray-500 focus:outline-none focus:text-gray-600 update-button">
+                                <img src="{% static 'icons/remove.svg' %}">
+                            </button>
                             <input type="number" value="{{ item.qty }}" class="mx-2 border text-center w-24" min="1">
-                            <!-- Increase Quantity Button -->
-                            <button type="button" data-index="{{product.id}}" data-url="{% url 'cart:cart_update' %}" data-csrf-token="{{ csrf_token }}" class="increase-qty text-gray-500 focus:outline-none focus:text-gray-600 update-button"><img src="{% static 'icons/add.svg' %}"></button>
+                            <button type="button" data-index="{{ product.id }}" data-url="{% url 'cart:cart_update' %}" data-csrf-token="{{ csrf_token }}" class="increase-qty text-gray-500 focus:outline-none focus:text-gray-600 update-button">
+                                <img src="{% static 'icons/add.svg' %}">
+                            </button>
                         </div>
                     </div>
 
                     <div class="w-1/5 flex justify-end items-center">
                         <button type="button" id="delete-button" data-url="{% url 'cart:cart_delete' %}" data-csrf-token="{{ csrf_token }}" data-index="{{ product.id }}" class="text-sm font-semibold flex items-center delete-button">
-                          <img src="{% static 'icons/close.svg' %}">
-                      </button>
+                            <img src="{% static 'icons/close.svg' %}">
+                        </button>
                     </div>
                 </div>
-
                 <hr class="my-5">
             </div>
             {% endwith %} {% endfor %}
-
             <a href="#" class="flex items-center font-semibold text-primary text-sm mt-10">
                 <img src="{% static 'icons/arrow_back.svg' %}">Back to shop
             </a>
         </div>
 
-        <!-- Summary Section -->
-        <div id="summary" class="w-1/4 px-8 py-10">
-            <h1 class="font-semibold text-2xl border-b pb-8">Summary</h1>
-
-            <!-- Items Summary -->
-            {% for item in Cart %} {% with product=item.product %}
-                <div data-index="{{product.id}}" class="product-item">
-                    <div class="flex justify-between mt-4">
-                        <span class="font-semibold text-sm uppercase">{{ product.title }}</span>
-                        <span class="font-semibold text-sm item-total-price">€{{ item.total_price }}</span>
-                    </div>
-                </div>
-            {% endwith %} {% endfor %}
-
-            <!-- Shipping -->
-            <div class="mt-10">
-                <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
-                <select class="block p-2 text-gray-600 w-full text-sm">
-            <option>Standard delivery - €5.00</option>
-        </select>
+        <!-- Total Cost Section -->
+        <div class="mt-8 w-full bg-white px-10 py-6">
+            <div class="flex justify-between border-b pb-4">
+                <h2 class="font-semibold text-xl">Total Cost</h2>
+                <h2 id="total_price" class="font-semibold text-xl">€{{ Cart.get_subtotal_price }}</h2>
             </div>
-
-            <!-- Promo Code -->
-            <div class="py-10">
-                <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">Give code</label>
-                <input type="text" id="promo" placeholder="Enter your code" class="p-2 text-sm w-full">
-            </div>
-
-            <!-- Total Cost -->
-            <div class="border-t mt-8">
-                <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-                    <span>Total cost</span>
-                    <span id="total_price">€{{ Cart.get_total_price }}</span>
-                </div>
-                <a href="{% url 'payment:checkout' %}" class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
-            Checkout
-        </a>
-            </div>
+            <a href="{% url 'payment:delivery_choices' %}"
+               class="block mt-4 w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
+                Delivery Choices
+            </a>
         </div>
-
     </div>
-    <script src="{% static 'js/cart.js' %}"></script>
 </div>
+<script src="{% static 'js/cart.js' %}"></script>
 {% endblock content %}
